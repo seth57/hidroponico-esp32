@@ -79,9 +79,10 @@ function handleIncomingData(data) {
 
 function updateDashboard(data) {
     // Update simple text values if they exist
-    if(document.getElementById('phValue')) document.getElementById('phValue').innerText = data.ph.toFixed(1);
-    if(document.getElementById('ecValue')) document.getElementById('ecValue').innerText = data.ec.toFixed(1);
-    if(document.getElementById('tempValue')) document.getElementById('tempValue').innerText = data.temperature.toFixed(1) + '°C';
+    if(document.getElementById('phValue') && data.ph !== undefined) document.getElementById('phValue').innerText = data.ph.toFixed(1);
+    if(document.getElementById('ecValue') && data.ec !== undefined) document.getElementById('ecValue').innerText = data.ec.toFixed(1);
+    if(document.getElementById('tempValue') && data.temperature !== undefined) document.getElementById('tempValue').innerText = data.temperature.toFixed(1) + '°C';
+    if(document.getElementById('ldrValue') && data.ldr !== undefined) document.getElementById('ldrValue').innerText = data.ldr.toFixed(0) + '%';
     
     // Here we would also update Chart.js instances if implemented
     if(window.updateCharts) {

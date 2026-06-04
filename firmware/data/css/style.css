@@ -1,16 +1,18 @@
 :root {
-  --bg-color-start: #0a0e1a;
-  --bg-color-mid: #1a1f3a;
-  --bg-color-end: #0d1117;
+  /* Paleta hidropónica: Tonos de agua profunda y bosque */
+  --bg-color-start: #061c16;
+  --bg-color-mid: #0a1a24;
+  --bg-color-end: #030c0a;
   
-  --glass-bg: rgba(255, 255, 255, 0.05);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(255, 255, 255, 0.06);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
   
-  --accent-primary: #00ff88;
-  --accent-secondary: #00d4ff;
-  --warning: #ff6b35;
-  --danger: #ff3366;
+  /* Colores de acento: Naturaleza (Verde hoja), Agua (Azul puro), Sol (Ámbar) */
+  --accent-primary: #10b981; /* Verde esmeralda vivo */
+  --accent-secondary: #0ea5e9; /* Azul agua claro */
+  --warning: #f59e0b; /* Luz solar / Alerta */
+  --danger: #ef4444; /* Rojo floral / Peligro */
   
   --text-primary: #ffffff;
   --text-secondary: rgba(255, 255, 255, 0.6);
@@ -46,14 +48,14 @@ body {
 
 .glass-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 12px 40px 0 rgba(0, 255, 136, 0.1);
+  box-shadow: 0 12px 40px 0 rgba(16, 185, 129, 0.15); /* Sombra esmeralda */
 }
 
 /* Typography */
-h1, h2, h3 { font-weight: 600; }
+h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; }
 .text-accent { color: var(--accent-primary); }
 .text-secondary { color: var(--text-secondary); }
-.value-large { font-size: 3rem; font-weight: 700; color: var(--accent-primary); text-shadow: 0 0 10px rgba(0,255,136,0.5); }
+.value-large { font-size: 3rem; font-weight: 700; color: var(--accent-primary); text-shadow: 0 0 12px rgba(16,185,129,0.4); }
 
 /* Layout */
 .app-container {
