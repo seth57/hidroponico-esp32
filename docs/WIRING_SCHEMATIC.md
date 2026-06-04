@@ -50,6 +50,11 @@ ADS1115 A1 ----> [Isolator] ----> Módulo EC V2 (DFRobot)
 GPIO  4 (1-Wire) ----> DS18B20 Temp (con R_Pull-up 4.7k a 3.3V)
 GPIO 14          ----> Jumper Selector de Modo (Conectar a GND para Modo Autónomo Local)
 
+-- LEDs Indicadores de Estado --
+GPIO 23 ----> [Resistencia 330Ω] ----> LED AZUL (Internet / MQTT) ----> GND
+GPIO 13 ----> [Resistencia 330Ω] ----> LED AMARILLO (Modo Autónomo) ----> GND
+GPIO 12 ----> [Resistencia 330Ω] ----> LED ROJO (Alarma / Fallo I/O) ----> GND
+
 -- Control Actuadores (Entradas de SSRs) --
 GPIO 25 ----> [Resistencia 10k↓ a GND] ----> SSR_1 (+)
 GPIO 26 ----> [Resistencia 10k↓ a GND] ----> SSR_2 (+)

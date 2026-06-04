@@ -9,6 +9,10 @@
 // TODO: Include wifi, webserver, mqtt etc when ready.
 
 #define PIN_JUMPER_MODE 14 // LOW = Autónomo, HIGH = Nube (Firebase)
+#define PIN_LED_INTERNET 23 // Azul
+#define PIN_LED_AUTONOMO 13 // Amarillo
+#define PIN_LED_ALARMA 12   // Rojo
+
 bool isAutonomousMode = true;
 
 void setup() {
@@ -16,8 +20,16 @@ void setup() {
     delay(1000);
     Serial.println("\n--- HydroControl Pro Iniciando ---");
     
-    // Configurar pin del Jumper con resistencia pull-up interna
+    // Configurar pin del Jumper y LEDs
     pinMode(PIN_JUMPER_MODE, INPUT_PULLUP);
+    pinMode(PIN_LED_INTERNET, OUTPUT);
+    pinMode(PIN_LED_AUTONOMO, OUTPUT);
+    pinMode(PIN_LED_ALARMA, OUTPUT);
+    
+    // Apagar LEDs al inicio
+    digitalWrite(PIN_LED_INTERNET, LOW);
+    digitalWrite(PIN_LED_AUTONOMO, LOW);
+    digitalWrite(PIN_LED_ALARMA, LOW);
     
     // Initialize components
     calibration.begin();
@@ -50,6 +62,10 @@ void loop() {
             Serial.println("MODO AUTÓNOMO ACTIVO (Por Jumper o pérdida de conexión). Usando config local.");
             isAutonomousMode = true;
         }
+        
+        digitalWrite(PIN_LED_AUTONOMO, HIGH);
+        digitalWrite(PIN_LED_INTERNET, cloudConnected ? HIGH : LOW);
+        
         // En modo autónomo, el ESP32 usa sus propias reglas y horarios guardados
         pumps.update();
         lights.update("12:00", sensors.getLightLevel()); // Horario local
@@ -58,11 +74,18 @@ void loop() {
             Serial.println("MODO NUBE ACTIVO. Dependiendo de Firebase/Servidor Central.");
             isAutonomousMode = false;
         }
+        
+        digitalWrite(PIN_LED_AUTONOMO, LOW);
+        digitalWrite(PIN_LED_INTERNET, HIGH);
+        
         // En modo nube, las órdenes de bombas y luces vienen de Firebase (vía MQTT).
-        // Solo actualizamos sensores para mandarlos a la nube.
-        // pumps.update() no aplicará horarios locales si se configura para omitirlos en modo nube.
         pumps.update(); // Mantiene gestión de timeout de seguridad
     }
+    
+    // Simulación de detección de error para LED de Alarma
+    // (Ej. LDR retorna 0 siempre, o pH está fuera de rango crítico)
+    bool hasAlarm = (sensors.getPH() < 4.0 || sensors.getPH() > 8.0);
+    digitalWrite(PIN_LED_ALARMA, hasAlarm ? HIGH : LOW);
     
     // Registrar ejecución periódicamente (simulación de una tarea finalizada exitosamente)
     static unsigned long lastSaveTime = 0;

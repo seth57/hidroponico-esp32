@@ -1,0 +1,25 @@
+{
+  "project": "HydroControl Pro",
+  "description": "Formato de Red (Netlist) genérico para importar/enrutar en EasyEDA",
+  "nets": [
+    { "name": "VCC_3V3", "nodes": ["ESP32:3.3V", "ADS1115:VDD", "DS3231:VCC", "R_PULLUP_ONEWIRE:1", "LDR_DIVIDER:1"] },
+    { "name": "GND", "nodes": ["ESP32:GND", "ADS1115:GND", "DS3231:GND", "SSR1:MINUS", "SSR2:MINUS", "SSR3:MINUS", "SSR4:MINUS", "SSR5:MINUS", "SSR_LUCES:MINUS", "JUMPER:1", "LED_INT:C", "LED_AUT:C", "LED_ALM:C", "LDR_DIVIDER_R:2", "DS18B20:GND"] },
+    { "name": "I2C_SDA", "nodes": ["ESP32:GPIO21", "ADS1115:SDA", "DS3231:SDA"] },
+    { "name": "I2C_SCL", "nodes": ["ESP32:GPIO22", "ADS1115:SCL", "DS3231:SCL"] },
+    { "name": "ONEWIRE", "nodes": ["ESP32:GPIO4", "DS18B20:DATA", "R_PULLUP_ONEWIRE:2"] },
+    { "name": "PUMP_MAIN", "nodes": ["ESP32:GPIO25", "SSR1:PLUS"] },
+    { "name": "PUMP_NUTA", "nodes": ["ESP32:GPIO26", "SSR2:PLUS"] },
+    { "name": "PUMP_NUTB", "nodes": ["ESP32:GPIO27", "SSR3:PLUS"] },
+    { "name": "PUMP_PH_UP", "nodes": ["ESP32:GPIO32", "SSR4:PLUS"] },
+    { "name": "PUMP_PH_DN", "nodes": ["ESP32:GPIO33", "SSR5:PLUS"] },
+    { "name": "LIGHT_Z1", "nodes": ["ESP32:GPIO16", "SSR_LUCES:PLUS"] },
+    { "name": "JUMPER_IN", "nodes": ["ESP32:GPIO14", "JUMPER:2"] },
+    { "name": "LED_INT_SIG", "nodes": ["ESP32:GPIO23", "R_LED1:1"] },
+    { "name": "LED_INT_A", "nodes": ["R_LED1:2", "LED_INT:A"] },
+    { "name": "LED_AUT_SIG", "nodes": ["ESP32:GPIO13", "R_LED2:1"] },
+    { "name": "LED_AUT_A", "nodes": ["R_LED2:2", "LED_AUT:A"] },
+    { "name": "LED_ALM_SIG", "nodes": ["ESP32:GPIO12", "R_LED3:1"] },
+    { "name": "LED_ALM_A", "nodes": ["R_LED3:2", "LED_ALM:A"] },
+    { "name": "LDR_SIGNAL", "nodes": ["LDR_DIVIDER:2", "LDR_DIVIDER_R:1", "ADS1115:A2"] }
+  ]
+}

@@ -74,6 +74,27 @@
                     </div>
                 </div>
 
+                <div class="glass-card" style="margin-bottom: 2rem;">
+                    <h3 style="margin-bottom: 1rem;">Estado del Sistema (UI Feedback)</h3>
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <span style="background: rgba(16,185,129,0.2); padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid var(--accent-primary);">
+                            🌐 MQTT: <strong id="uiMqtt">Conectado</strong>
+                        </span>
+                        <span style="background: rgba(14,165,233,0.2); padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid var(--accent-secondary);">
+                            ⚙️ Modo: <strong id="uiMode">Nube</strong>
+                        </span>
+                        <span style="background: rgba(239,68,68,0.2); padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid var(--danger);">
+                            🚨 Alarma: <strong id="uiAlarm">Ninguna</strong>
+                        </span>
+                        <span style="background: rgba(255,255,255,0.1); padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2);">
+                            💧 Bombas Activas: <strong id="uiPumps">0/6</strong>
+                        </span>
+                        <span style="background: rgba(255,255,255,0.1); padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2);">
+                            💡 Luces Activas: <strong id="uiLights">0/5</strong>
+                        </span>
+                    </div>
+                </div>
+
                 <div class="glass-card">
                     <h3 style="margin-bottom: 1rem;">Gráfica en Tiempo Real</h3>
                     <div class="chart-container">
