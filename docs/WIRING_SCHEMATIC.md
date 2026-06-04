@@ -48,9 +48,6 @@ ADS1115 A1 ----> [Isolator] ----> Módulo EC V2 (DFRobot)
 
 -- Sensores Digitales --
 GPIO  4 (1-Wire) ----> DS18B20 Temp (con R_Pull-up 4.7k a 3.3V)
-GPIO 23          ----> Sensor Flujo YF-S201 (Opcional, requiere div de voltaje a 3.3V)
-GPIO 13          ----> JSN-SR04T Trig
-GPIO 12          ----> JSN-SR04T Echo
 
 -- Control Actuadores (Entradas de SSRs) --
 GPIO 25 ----> [Resistencia 10k↓ a GND] ----> SSR_1 (+)

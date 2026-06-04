@@ -19,7 +19,7 @@ void LightController::begin() {
     Serial.println("Controlador de iluminación inicializado.");
 }
 
-void LightController::update(String currentTimeHHMM) {
+void LightController::update(String currentTimeHHMM, float currentNaturalLightLevel) {
     for (int i = 0; i < 5; i++) {
         if (channels[i]->mode == LIGHT_PROGRAMADO) {
             // Simple string comparison for HH:MM format
@@ -31,6 +31,14 @@ void LightController::update(String currentTimeHHMM) {
             } else {
                 // Example: 18:00 to 06:00 (overnight)
                 shouldBeOn = (currentTimeHHMM >= channels[i]->timeOn || currentTimeHHMM < channels[i]->timeOff);
+            }
+            
+            // --- LDR OVERRIDE LOGIC ---
+            // Si según el reloj debe estar apagado (es de día), pero está muy oscuro (LDR < 30%)
+            // Encendemos temporalmente por oscuridad natural.
+            if (!shouldBeOn && currentNaturalLightLevel < 30.0) {
+                shouldBeOn = true;
+                // Serial.println("Override LDR: Encendiendo luces por baja luminosidad natural.");
             }
             
             if (shouldBeOn != channels[i]->state) {

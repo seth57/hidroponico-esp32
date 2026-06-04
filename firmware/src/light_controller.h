@@ -28,7 +28,7 @@ private:
 public:
     LightController();
     void begin();
-    void update(String currentTimeHHMM);
+    void update(String currentTimeHHMM, float currentNaturalLightLevel);
     void setLightState(int zoneId, bool state);
     void setLightMode(int zoneId, LightMode mode);
     void setSchedule(int zoneId, String timeOn, String timeOff);
