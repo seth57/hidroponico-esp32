@@ -46,8 +46,9 @@ GND          ----> ADS1115 GND   [ Y en paralelo ] ----> DS3231 (GND)
 ADS1115 A0 ----> [Isolator] ----> Módulo pH V2 (DFRobot)
 ADS1115 A1 ----> [Isolator] ----> Módulo EC V2 (DFRobot)
 
--- Sensores Digitales --
+-- Sensores Digitales e Interruptores --
 GPIO  4 (1-Wire) ----> DS18B20 Temp (con R_Pull-up 4.7k a 3.3V)
+GPIO 14          ----> Jumper Selector de Modo (Conectar a GND para Modo Autónomo Local)
 
 -- Control Actuadores (Entradas de SSRs) --
 GPIO 25 ----> [Resistencia 10k↓ a GND] ----> SSR_1 (+)
