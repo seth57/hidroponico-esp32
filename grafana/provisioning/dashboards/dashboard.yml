@@ -1,0 +1,19 @@
+# ==============================================
+# HydroControl Pro - Aprovisionamiento de Dashboards de Grafana
+# ==============================================
+# Configura la carga automática de dashboards desde archivos JSON.
+
+apiVersion: 1
+
+providers:
+  - name: 'HydroControl Pro Dashboards'
+    orgId: 1
+    folder: 'HydroControl Pro'
+    type: file
+    disableDeletion: false
+    editable: true
+    updateIntervalSeconds: 30
+    allowUiUpdates: true
+    options:
+      path: /var/lib/grafana/dashboards
+      foldersFromFilesStructure: false

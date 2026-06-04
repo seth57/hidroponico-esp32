@@ -1,0 +1,18 @@
+# ==============================================
+# HydroControl Pro - Configuración de Datasource para Grafana
+# ==============================================
+# Este archivo configura automáticamente el datasource
+# SimpleJSON que conecta Grafana con el backend de HydroControl.
+
+apiVersion: 1
+
+datasources:
+  - name: HydroControl Pro
+    type: simplejson-datasource
+    access: proxy
+    url: http://localhost:3000/api/grafana
+    isDefault: true
+    editable: true
+    jsonData:
+      tlsSkipVerify: true
+    version: 1

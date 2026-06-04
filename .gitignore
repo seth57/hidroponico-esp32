@@ -1,0 +1,82 @@
+# ============================================
+# HydroControl Pro - .gitignore
+# PlatformIO + Node.js + Docker
+# ============================================
+
+# --- PlatformIO ---
+.pio/
+.pioenvs/
+.piolibdeps/
+.piorepo/
+
+# --- IDE / Editor ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.sublime-project
+*.sublime-workspace
+
+# --- Node.js ---
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# --- Variables de entorno ---
+.env
+.env.local
+.env.production
+.env.development
+
+# --- Base de datos ---
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+
+# --- Logs ---
+logs/
+*.log
+
+# --- Docker ---
+docker-compose.override.yml
+
+# --- Grafana ---
+grafana/data/
+
+# --- OS Files ---
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# --- Archivos de compilación ---
+build/
+dist/
+*.o
+*.obj
+*.elf
+*.bin
+*.hex
+*.map
+
+# --- Archivos temporales ---
+tmp/
+temp/
+*.tmp
+*.bak
+*.backup
+
+# --- Configuración local ---
+src/config.h
+
+# --- Datos de calibración (contienen valores específicos del hardware) ---
+calibration_data.json

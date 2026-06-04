@@ -1,0 +1,81 @@
+# ==============================================
+# HydroControl Pro - Docker Compose
+# ==============================================
+# Servicios de infraestructura: Grafana y Mosquitto MQTT.
+# El backend Node.js se ejecuta de forma nativa con npm start.
+
+version: '3.8'
+
+services:
+  # ============================================
+  # Grafana - Plataforma de visualización
+  # ============================================
+  grafana:
+    image: grafana/grafana:latest
+    container_name: hydrocontrol-grafana
+    restart: unless-stopped
+    ports:
+      - "3001:3000"
+    environment:
+      # Credenciales por defecto de administrador
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=hydrocontrol
+      # Tema oscuro por defecto
+      - GF_USERS_DEFAULT_THEME=dark
+      # Permitir acceso anónimo para visualización
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Viewer
+      # Instalar plugin SimpleJSON automáticamente
+      - GF_INSTALL_PLUGINS=grafana-simple-json-datasource
+      # Nombre de la instancia
+      - GF_SERVER_ROOT_URL=http://localhost:3001
+    volumes:
+      # Aprovisionamiento automático de datasources
+      - ./provisioning/datasources:/etc/grafana/provisioning/datasources:ro
+      # Aprovisionamiento automático de dashboards
+      - ./provisioning/dashboards:/etc/grafana/provisioning/dashboards:ro
+      # Archivos de dashboards JSON
+      - ./dashboards:/var/lib/grafana/dashboards:ro
+      # Persistencia de datos de Grafana
+      - grafana_data:/var/lib/grafana
+    networks:
+      - hydrocontrol-net
+    # Grafana necesita acceso al backend en el host
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  # ============================================
+  # Mosquitto - Broker MQTT
+  # ============================================
+  mosquitto:
+    image: eclipse-mosquitto:2
+    container_name: hydrocontrol-mosquitto
+    restart: unless-stopped
+    ports:
+      - "1883:1883"     # MQTT estándar
+      - "9001:9001"     # WebSockets MQTT
+    volumes:
+      - ./mosquitto/config:/mosquitto/config:ro
+      - mosquitto_data:/mosquitto/data
+      - mosquitto_log:/mosquitto/log
+    networks:
+      - hydrocontrol-net
+
+# ============================================
+# Volúmenes persistentes
+# ============================================
+volumes:
+  grafana_data:
+    driver: local
+  mosquitto_data:
+    driver: local
+  mosquitto_log:
+    driver: local
+
+# ============================================
+# Red interna para comunicación entre servicios
+# ============================================
+networks:
+  hydrocontrol-net:
+    driver: bridge
+    name: hydrocontrol-network

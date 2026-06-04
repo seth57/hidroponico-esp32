@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HydroControl Pro - Panel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar / Bottom Nav -->
+        <nav class="bottom-nav">
+            <a href="#" class="nav-item active" data-target="dashboard">
+                <svg viewBox="0 0 24 24"><path d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z"/></svg>
+                Inicio
+            </a>
+            <a href="#" class="nav-item" data-target="pumps">
+                <svg viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,0 2,12C2,17.5 6.5,22 12,22A10,10 0 0,0 22,12C22,6.5 17.5,2 12,2M12,20A8,8 0 0,1 4,12C4,7.6 7.6,4 12,4A8,8 0 0,1 20,12C20,17.5 16.5,20 12,20M12,6A6,6 0 0,0 6,12C6,15.3 8.7,18 12,18A6,6 0 0,0 18,12C18,8.7 15.3,6 12,6M12,16A4,4 0 0,1 8,12C8,9.8 9.8,8 12,8A4,4 0 0,1 16,12C16,14.2 14.2,16 12,16Z"/></svg>
+                Bombas
+            </a>
+            <a href="#" class="nav-item" data-target="lights">
+                <svg viewBox="0 0 24 24"><path d="M12,2A7,7 0 0,0 5,9C5,11.38 6.19,13.47 8,14.74V17A1,1 0 0,0 9,18H15A1,1 0 0,0 16,17V14.74C17.81,13.47 19,11.38 19,9A7,7 0 0,0 12,2M9,21A1,1 0 0,0 10,22H14A1,1 0 0,0 15,21V20H9V21Z"/></svg>
+                Luces
+            </a>
+            <a href="#" class="nav-item" data-target="calibration">
+                <svg viewBox="0 0 24 24"><path d="M12,2L1,21H23M12,6L19.53,19H4.47M11,10V14H13V10M11,16V18H13V16"/></svg>
+                Calibrar
+            </a>
+            <a href="#" class="nav-item" data-target="settings">
+                <svg viewBox="0 0 24 24"><path d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.68 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z"/></svg>
+                Config
+            </a>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                <h2>🌿 HydroControl <span class="text-accent">Pro</span></h2>
+                <div class="status-indicator" id="connectionStatus" title="Conectando..."></div>
+            </header>
+
+            <!-- Dashboard Section -->
+            <section id="dashboard-section" class="content-section">
+                <div class="dashboard-grid">
+                    <!-- pH Card -->
+                    <div class="glass-card gauge-container">
+                        <h3 class="text-secondary">pH del Sistema</h3>
+                        <div class="value-large" id="phValue">--</div>
+                        <p class="text-muted">Rango ideal: 5.5 - 6.5</p>
+                    </div>
+                    
+                    <!-- EC Card -->
+                    <div class="glass-card gauge-container">
+                        <h3 class="text-secondary">Conductividad (EC)</h3>
+                        <div class="value-large" id="ecValue" style="color: var(--accent-secondary); text-shadow: 0 0 10px rgba(0,212,255,0.5);">--</div>
+                        <p class="text-muted">Rango ideal: 1.2 - 2.5 mS/cm</p>
+                    </div>
+                    
+                    <!-- Temp Card -->
+                    <div class="glass-card gauge-container">
+                        <h3 class="text-secondary">Temperatura</h3>
+                        <div class="value-large" id="tempValue" style="color: var(--warning); text-shadow: 0 0 10px rgba(255,107,53,0.5);">--</div>
+                        <p class="text-muted">Rango ideal: 20 - 28 °C</p>
+                    </div>
+                </div>
+
+                <div class="glass-card">
+                    <h3 style="margin-bottom: 1rem;">Gráfica en Tiempo Real</h3>
+                    <div class="chart-container">
+                        <canvas id="mainChart"></canvas>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Other sections (Pumps, Lights, etc.) are hidden by default and handled via JS -->
+            <section id="pumps-section" class="content-section" style="display: none;">
+                <h2>Control de Bombas</h2>
+                <!-- Pump controls will go here -->
+                <p>Módulo de bombas en desarrollo.</p>
+            </section>
+            
+        </main>
+    </div>
+
+    <script src="js/websocket.js"></script>
+    <script>
+        // Simple Chart.js initialization for demo
+        const ctx = document.getElementById('mainChart');
+        if(ctx) {
+            const chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['10:00', '10:05', '10:10', '10:15', '10:20', '10:25'],
+                    datasets: [
+                        {
+                            label: 'pH',
+                            data: [6.1, 6.2, 6.2, 6.1, 6.0, 6.1],
+                            borderColor: '#00ff88',
+                            backgroundColor: 'rgba(0, 255, 136, 0.1)',
+                            tension: 0.4,
+                            fill: true
+                        },
+                        {
+                            label: 'EC',
+                            data: [1.8, 1.8, 1.9, 1.9, 1.8, 1.8],
+                            borderColor: '#00d4ff',
+                            backgroundColor: 'rgba(0, 212, 255, 0.1)',
+                            tension: 0.4,
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { labels: { color: 'white' } }
+                    },
+                    scales: {
+                        x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: 'rgba(255,255,255,0.6)' } },
+                        y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: 'rgba(255,255,255,0.6)' } }
+                    }
+                }
+            });
+        }
+        
+        // Simple Tab navigation
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                // Remove active class from all
+                document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+                // Add to clicked
+                item.classList.add('active');
+                
+                // Hide all sections
+                document.querySelectorAll('.content-section').forEach(sec => sec.style.display = 'none');
+                
+                // Show target section
+                const target = item.getAttribute('data-target');
+                const targetSec = document.getElementById(`${target}-section`);
+                if(targetSec) targetSec.style.display = 'block';
+            });
+        });
+    </script>
+</body>
+</html>
