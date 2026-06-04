@@ -37,10 +37,11 @@
 
            [ ESP32 WROOM 32 DevKit ]
            
--- I2C / Sensores Analógicos --
-GPIO 21 (SDA) ----> ADS1115 SDA
-GPIO 22 (SCL) ----> ADS1115 SCL
-3.3V         ----> ADS1115 VDD
+-- I2C / Sensores Analógicos y RTC --
+GPIO 21 (SDA) ----> ADS1115 SDA   [ Y en paralelo ] ----> DS3231 (SDA)
+GPIO 22 (SCL) ----> ADS1115 SCL   [ Y en paralelo ] ----> DS3231 (SCL)
+3.3V         ----> ADS1115 VDD   [ Y en paralelo ] ----> DS3231 (VCC)
+GND          ----> ADS1115 GND   [ Y en paralelo ] ----> DS3231 (GND)
 
 ADS1115 A0 ----> [Isolator] ----> Módulo pH V2 (DFRobot)
 ADS1115 A1 ----> [Isolator] ----> Módulo EC V2 (DFRobot)
