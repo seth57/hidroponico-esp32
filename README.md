@@ -31,6 +31,7 @@ Consulta la carpeta `docs/` para guías paso a paso:
 3. Inicia el servidor de Backend con `npm install` y `npm start`.
 4. Importa los dashboards de Grafana provistos en `grafana/dashboards`.
 5. Calibra los sensores usando la web UI y el [Manual de Calibración](docs/CALIBRATION_GUIDE.md).
+6. ¿Quieres usar Firebase en la nube en vez de base de datos local? Revisa la [Guía de Integración con Firebase](docs/FIREBASE_SETUP.md).
 
 ## Licencia
 MIT License - Creado para control avanzado de cultivos invernaderos.
